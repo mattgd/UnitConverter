@@ -1,56 +1,112 @@
+import sys
 import math
 
 # Convert from degrees to radians or vice versa
 temperature = ['c', 'f', 'k']
 circle = ['d', 'r']
+distance = ['cm', 'm', 'in', 'ft']
 
-def celsiusToFahrenheit(temp):
+# TEMPERATURE CONVERSION
+# Celsius and Fahrenheit
+def c_to_f(temp):
     return temp * 1.8 + 32
-
-def fahrenheitToCelsius(temp):
+def f_to_c(temp):
     return (temp - 32) / 1.8
 
-def celsuisToKelvin(temp):
+# Celsius and Kelvin
+def c_to_k(temp):
     return temp + 273.15
-
-def kelvinToCelsius(temp):
+def k_to_c(temp):
     return temp - 273.15
 
-def radiansToDegrees(value):
-    return math.degrees(value)
+# Fahrenheit and Kelvin
+def f_to_k(temp):
+    return c_to_k(f_to_c(temp))
+def k_to_f(temp):
+    return c_to_f(k_to_c(temp))
 
-def degreesToRadians(value):
+# CIRCLE CONVERSION
+# Radians and degress
+def r_to_d(value):
+    return math.degrees(value)
+def d_to_r(value):
     return math.radians(value)
 
-def convert(number):
-    number = number.lower()
-    value = float(number[0:-2])
-    unitsFrom = number[-2:-1]
-    unitsTo = number[-1:]
+# DISTANCE CONVERSION
+# Centimeters and inches
+def cm_to_in(value):
+    return value * .393701
+def in_to_cm(value):
+    return value / .393701
 
-    if unitsFrom in temperature and unitsTo in temperature:
-        if unitsFrom == 'c' and unitsTo == 'f':
-            value = celsiusToFahrenheit(value)
-        elif unitsFrom == 'c' and unitsTo == 'k':
-            value = celsuisToKelvin(value)
-        elif unitsFrom == 'f' and unitsTo == 'c':
-            value = fahrenheitToCelsius(value)
-        elif unitsFrom == 'f' and unitsTo == 'k':
-            value = celsuisToKelvin(fahrenheitToCelsius(value))
-        elif unitsFrom == 'k' and unitsTo == 'c':
-            value = kelvinToCelsius(value)
-        elif unitsFrom == 'k' and unitsTo == 'f':
-            value = celsiusToFahrenheit(kelvinToCelsius(value))
-    elif unitsFrom in circle and unitsTo in circle:
-        if unitsFrom == 'r':
-            value = radiansToDegrees(value)
-        elif unitsFrom == 'd':
-            value = degreesToRadians(value)
-    else:
+# Inches and feet
+def in_to_ft(value):
+    return value / 12
+def ft_to_in(value):
+    return value * 12
+
+# Meters and feet
+def m_to_ft(value):
+    return value * 3.28084
+def ft_to_m(value):
+    return value / 3.28084
+
+# TODO Come up with a better way to convert between Metric system units
+# Centimeters and meters
+def cm_to_m(value):
+    return value * .01
+def m_to_cm(value):
+    return value / .01
+
+# Centimeters and feet
+def cm_to_ft(value):
+    return in_to_ft(cm_to_in(value))
+def ft_to_cm(value):
+    return in_to_cm(ft_to_in(value))
+
+# Meters and inches
+def m_to_in(value):
+    return ft_to_in(m_to_ft(value))
+def in_to_m(value):
+    return ft_to_m(in_to_ft(value))
+
+# Takes in a parameter s, the value and the unit to convert from/to
+def convert_units(s):
+    s = s.lower() # Convert to lower case for easier use
+
+    # Ensure valid input: value/unitfrom/unitto
+    try:
+        s.index('/')
+    except ValueError:
+        return 'Invalid input. Format: value/unitfrom/unitto\n'
+
+    value = float(s[0:s.index('/')]) # Extract the numeric value from the string
+    decimal_places = len(str(value)[str(value).index('.') + 1:])
+    units = s[s.index('/') + 1:] # Extract the units from the string
+
+    # Ensure valid units input: unitfrom/unitto
+    try:
+        units.index('/')
+    except ValueError:
+        return 'Invalid input. Format: value/unitfrom/unitto\n'
+
+    units_from = units[0:units.index('/')] # Everything before the slash is from
+    units_to = units[units.index('/') + 1:] # Everything after the slash is to
+
+    # Return the value if units are the same
+    if units_from == units_to:
+        return str(value) + units_to
+
+    conversion_method = units_from + '_to_' + units_to # Name of method to use
+    thismodule = sys.modules[__name__] # This module as object
+
+    try:
+        value = getattr(thismodule, conversion_method)(value)
+        return str(round(value, decimal_places)) + units_to
+    except AttributeError:
         return 'Incompatible units.'
 
-    return str(round(value, 2)) + unitsTo
-
+# The rest of the code is just here for testing purposes
 # Information about the script
 print('Python unit converter by mattgd.\nUnits supported radians (r), degrees (d), Celsius (c), Fahrenheit (f), and Kelvin (k).')
 print('Example entries: 1.345rd, 33fc')
@@ -65,4 +121,4 @@ while number != 'exit':
         break
 
     # Display the converted number
-    print(convert(number))
+    print(convert_units(number))
