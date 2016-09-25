@@ -1,36 +1,48 @@
-metric_dist_dict = {
-    'Em': 1000000000000000000,
-    'Pm': 1000000000000000,
-    'Tm': 1000000000000,
-    'Gm': 1000000000,
-    'Mm': 1000000,
-    'km': 1000,
-    'hm': 100,
-    'dam': 10,
-    'm': 1,
-    'dm': .1,
-    'cm': .01,
-    'mm': .001,
-    'μm': .000001,
-    'nm': .000000001,
-    'pm': .000000000001,
-    'fm': .000000000000001,
-    'am': .000000000000000001
-}
-imperial_dist_dict = {
-    'lea': 190080,
-    'mi': 63360,
-    'fu': 7920,
-    'ch': 792,
-    'rod': 198,
-    'yd': 36,
-    'ft': 12,
-    'li': 7.92,
-    'in': 1,
-    'th': .001
-}
+# TODO Make this dictionary usable for volume (liters) and mass (grams) as well
+class dictionary:
 
-def metric_dict():
-    return metric_dist_dict
-def imperial_dict():
-    return imperial_dist_dict
+    __metric_dict = {
+        'E': 1000000000000000000,
+        'P': 1000000000000000,
+        'T': 1000000000000,
+        'G': 1000000000,
+        'M': 1000000,
+        'k': 1000,
+        'h': 100,
+        'da': 10,
+        None: 1,
+        'd': .1,
+        'c': .01,
+        'm': .001,
+        'μ': .000001,
+        'n': .000000001,
+        'p': .000000000001,
+        'f': .000000000000001,
+        'a': .000000000000000001
+    }
+    __imperial_dist_dict = {
+        'lea': 190080,
+        'mi': 63360,
+        'fu': 7920,
+        'ch': 792,
+        'rod': 198,
+        'yd': 36,
+        'ft': 12,
+        'li': 7.92,
+        'in': 1,
+        'th': .001
+    }
+    __imperial_vol_dict = {
+        'gal': 128,
+        'qt': 32,
+        'pt': 16,
+        'gi': 4,
+        'floz': 1
+    }
+
+    def metric_dict(self):
+        return self.__metric_dict
+    def imperial_dist_dict(self):
+        return self.__imperial_dist_dict
+    def imperial_vol_dict(self):
+        return self.__imperial_vol_dict

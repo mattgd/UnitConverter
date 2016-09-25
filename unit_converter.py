@@ -2,11 +2,6 @@ import sys
 import math
 import unit_dictionary
 
-# Convert from degrees to radians or vice versa
-temperature = ['c', 'f', 'k']
-circle = ['d', 'r']
-distance = ['cm', 'm', 'in', 'ft']
-
 # TEMPERATURE CONVERSION
 # Celsius and Fahrenheit
 def c_to_f(value):
@@ -42,6 +37,45 @@ def imperial_to_metric(value, metric_base, imperial_base, metric_multiplier):
     # 7.628 in / 1 * metric_multiplier / 1
     return value * imperial_base * metric_multiplier / metric_base
 
+def check_metric_imperial(value, units_from, units_to, decimal_places):
+    dict = unit_dictionary.dictionary() # Dictionary object
+    metric_dict = dict.metric_dict() # Universal Metric unit dictionary
+    imperial_dist_dict = dict.imperial_dist_dict() # Imperial length dictionary
+    imperial_vol_dict = dict.imperial_vol_dict() # Imperial volume dictionary
+
+    metric_base = None
+    imperial_base = None
+
+    # Removes the type of conversion: length (m), volume (l), mass (g)
+    metric_units_from = units_from[0:len(units_from) - 1] if len(units_from) > 1 else None
+    metric_units_to = units_to[0:len(units_to) - 1] if len(units_to) > 1 else None
+
+    # Metric and Imperial distances
+    if metric_units_from in metric_dict and units_to in imperial_dist_dict:
+        metric_base = metric_dict.get(metric_units_from, None)
+        imperial_base = imperial_dist_dict.get(units_to, None)
+        value = metric_to_imperial(value, metric_base, imperial_base, 39.3701)
+        return str(round(value, decimal_places)) + units_to
+    elif units_from in imperial_dist_dict and metric_units_to in metric_dict:
+        imperial_base = imperial_dist_dict.get(units_from, None)
+        metric_base = metric_dict.get(metric_units_to, None)
+        value = imperial_to_metric(value, metric_base, imperial_base, .0254)
+        return str(round(value, decimal_places)) + units_to
+
+    # Metric and Imperial volumes
+    if metric_units_from in metric_dict and units_to in imperial_vol_dict:
+        metric_base = metric_dict.get(metric_units_from, None)
+        imperial_base = imperial_vol_dict.get(units_to, None)
+        value = metric_to_imperial(value, metric_base, imperial_base, 33.814)
+        return str(round(value, decimal_places)) + units_to
+    elif units_from in imperial_vol_dict and metric_units_to in metric_dict:
+        imperial_base = imperial_vol_dict.get(units_from, None)
+        metric_base = metric_dict.get(metric_units_to, None)
+        value = imperial_to_metric(value, metric_base, imperial_base, .0295735)
+        return str(round(value, decimal_places)) + units_to
+
+    return False
+
 # Takes in a parameter s, the value and the unit to convert from/to
 def convert_units(s):
     s = s.lower() # Convert to lower case for easier use
@@ -65,35 +99,24 @@ def convert_units(s):
     units_from = units[0:units.index('/')] # Everything before the slash is from
     units_to = units[units.index('/') + 1:] # Everything after the slash is to
 
-    # Metric and Imperial distance conversion
-    metric_dist_dict = unit_dictionary.metric_dict() # Metric unit dictionary
-    imperial_dist_dict = unit_dictionary.imperial_dict() # Imperial unit dictionary
-
-    metric_base = None
-    imperial_base = None
-    if units_from in metric_dist_dict and units_to in imperial_dist_dict:
-        metric_base = metric_dist_dict.get(units_from, None)
-        imperial_base = imperial_dist_dict.get(units_to, None)
-        value = metric_to_imperial(value, metric_base, imperial_base, 39.3701)
-        return str(round(value, decimal_places)) + units_to
-    elif units_from in imperial_dist_dict and units_to in metric_dist_dict:
-        imperial_base = imperial_dist_dict.get(units_from, None)
-        metric_base = metric_dist_dict.get(units_to, None)
-        value = imperial_to_metric(value, metric_base, imperial_base, .0254)
-        return str(round(value, decimal_places)) + units_to
-
     # Return the value if units are the same
     if units_from == units_to:
         return str(value) + units_to
 
-    conversion_method = units_from + '_to_' + units_to # Name of method to use
-    thismodule = sys.modules[__name__] # This module as object
+    # Check for Metric and Imperial units
+    metric_imperial_response = check_metric_imperial(value, units_from, units_to, decimal_places)
+    if metric_imperial_response == False:
+        # Get proper method for conversion
+        conversion_method = units_from + '_to_' + units_to # Name of method to use
+        thismodule = sys.modules[__name__] # This module as object
 
-    try:
-        value = getattr(thismodule, conversion_method)(value)
-        return str(round(value, decimal_places)) + units_to
-    except AttributeError:
-        return 'Incompatible units.'
+        try:
+            value = getattr(thismodule, conversion_method)(value)
+            return str(round(value, decimal_places)) + units_to
+        except AttributeError:
+            return 'Incompatible units.'
+    else:
+        return metric_imperial_response
 
 # The rest of the code is just here for testing purposes
 # Information about the script
