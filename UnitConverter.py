@@ -8,22 +8,22 @@ distance = ['cm', 'm', 'in', 'ft']
 
 # TEMPERATURE CONVERSION
 # Celsius and Fahrenheit
-def c_to_f(temp):
-    return temp * 1.8 + 32
-def f_to_c(temp):
-    return (temp - 32) / 1.8
+def c_to_f(value):
+    return value * 1.8 + 32
+def f_to_c(value):
+    return (value - 32) / 1.8
 
 # Celsius and Kelvin
-def c_to_k(temp):
-    return temp + 273.15
-def k_to_c(temp):
-    return temp - 273.15
+def c_to_k(value):
+    return value + 273.15
+def k_to_c(value):
+    return value - 273.15
 
 # Fahrenheit and Kelvin
-def f_to_k(temp):
-    return c_to_k(f_to_c(temp))
-def k_to_f(temp):
-    return c_to_f(k_to_c(temp))
+def f_to_k(value):
+    return c_to_k(f_to_c(value))
+def k_to_f(value):
+    return c_to_f(k_to_c(value))
 
 # CIRCLE CONVERSION
 # Radians and degress
