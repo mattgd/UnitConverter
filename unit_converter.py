@@ -1,5 +1,6 @@
 import sys
 import math
+import unit_dictionary
 
 # Convert from degrees to radians or vice versa
 temperature = ['c', 'f', 'k']
@@ -33,42 +34,13 @@ def d_to_r(value):
     return math.radians(value)
 
 # DISTANCE CONVERSION
-# Centimeters and inches
-def cm_to_in(value):
-    return value * .393701
-def in_to_cm(value):
-    return value / .393701
-
-# Inches and feet
-def in_to_ft(value):
-    return value / 12
-def ft_to_in(value):
-    return value * 12
-
-# Meters and feet
-def m_to_ft(value):
-    return value * 3.28084
-def ft_to_m(value):
-    return value / 3.28084
-
-# TODO Come up with a better way to convert between Metric system units
-# Centimeters and meters
-def cm_to_m(value):
-    return value * .01
-def m_to_cm(value):
-    return value / .01
-
-# Centimeters and feet
-def cm_to_ft(value):
-    return in_to_ft(cm_to_in(value))
-def ft_to_cm(value):
-    return in_to_cm(ft_to_in(value))
-
-# Meters and inches
-def m_to_in(value):
-    return ft_to_in(m_to_ft(value))
-def in_to_m(value):
-    return ft_to_m(in_to_ft(value))
+# Convert Metric units to Imperial units
+def metric_to_imperial(value, metric_base, imperial_base, imperial_multiplier):
+    return value * metric_base * imperial_multiplier * imperial_base
+# Convert Imperial units to Metric units
+def imperial_to_metric(value, metric_base, imperial_base, metric_multiplier):
+    # 7.628 in / 1 * metric_multiplier / 1
+    return value * imperial_base * metric_multiplier / metric_base
 
 # Takes in a parameter s, the value and the unit to convert from/to
 def convert_units(s):
@@ -92,6 +64,23 @@ def convert_units(s):
 
     units_from = units[0:units.index('/')] # Everything before the slash is from
     units_to = units[units.index('/') + 1:] # Everything after the slash is to
+
+    # Metric and Imperial distance conversion
+    metric_dist_dict = unit_dictionary.metric_dict() # Metric unit dictionary
+    imperial_dist_dict = unit_dictionary.imperial_dict() # Imperial unit dictionary
+
+    metric_base = None
+    imperial_base = None
+    if units_from in metric_dist_dict and units_to in imperial_dist_dict:
+        metric_base = metric_dist_dict.get(units_from, None)
+        imperial_base = imperial_dist_dict.get(units_to, None)
+        value = metric_to_imperial(value, metric_base, imperial_base, 39.3701)
+        return str(round(value, decimal_places)) + units_to
+    elif units_from in imperial_dist_dict and units_to in metric_dist_dict:
+        imperial_base = imperial_dist_dict.get(units_from, None)
+        metric_base = metric_dist_dict.get(units_to, None)
+        value = imperial_to_metric(value, metric_base, imperial_base, .0254)
+        return str(round(value, decimal_places)) + units_to
 
     # Return the value if units are the same
     if units_from == units_to:
