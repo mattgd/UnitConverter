@@ -42,6 +42,7 @@ def check_metric_imperial(value, units_from, units_to, decimal_places):
     metric_dict = dict.metric_dict() # Universal Metric unit dictionary
     imperial_dist_dict = dict.imperial_dist_dict() # Imperial length dictionary
     imperial_vol_dict = dict.imperial_vol_dict() # Imperial volume dictionary
+    imperial_mass_dict = dict.imperial_mass_dict() # Imperial mass dictionary
 
     metric_base = None
     imperial_base = None
@@ -72,6 +73,18 @@ def check_metric_imperial(value, units_from, units_to, decimal_places):
         imperial_base = imperial_vol_dict.get(units_from, None)
         metric_base = metric_dict.get(metric_units_to, None)
         value = imperial_to_metric(value, metric_base, imperial_base, .0295735)
+        return str(round(value, decimal_places)) + units_to
+
+    # Metric and Imperial masses
+    if metric_units_from in metric_dict and units_to in imperial_mass_dict:
+        metric_base = metric_dict.get(metric_units_from, None)
+        imperial_base = imperial_mass_dict.get(units_to, None)
+        value = metric_to_imperial(value, metric_base, imperial_base, .00220462)
+        return str(round(value, decimal_places)) + units_to
+    elif units_from in imperial_mass_dict and metric_units_to in metric_dict:
+        imperial_base = imperial_mass_dict.get(units_from, None)
+        metric_base = metric_dict.get(metric_units_to, None)
+        value = imperial_to_metric(value, metric_base, imperial_base, 453.592)
         return str(round(value, decimal_places)) + units_to
 
     return False

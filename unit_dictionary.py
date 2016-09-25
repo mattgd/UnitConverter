@@ -39,6 +39,17 @@ class dictionary:
         'gi': 4,
         'floz': 1
     }
+    __imperial_mass_dict = {
+        't': 2240,
+        'cwt': 112,
+        'qr': 28,
+        'qtr': 28,
+        'st': 14,
+        'lb': 1,
+        'oz': .0625,
+        'dr': .00390625,
+        'gr': .00014285714
+    }
 
     def metric_dict(self):
         return self.__metric_dict
@@ -46,3 +57,5 @@ class dictionary:
         return self.__imperial_dist_dict
     def imperial_vol_dict(self):
         return self.__imperial_vol_dict
+    def imperial_mass_dict(self):
+        return self.__imperial_mass_dict
