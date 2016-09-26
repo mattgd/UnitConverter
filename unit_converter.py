@@ -28,13 +28,30 @@ def r_to_d(value):
 def d_to_r(value):
     return math.radians(value)
 
+# TIME CONVERSION
+def convert_time(value, units_from_base, units_to_base):
+    return value * units_from_base / units_to_base
+
+def check_time(value, units_from, units_to, decimal_places):
+    dict = unit_dictionary.dictionary() # Dictionary object
+    time_dict = dict.time_dict() # Time unit dictionary
+
+    # Metric and Imperial distances
+    if units_from in time_dict and units_to in time_dict:
+        units_from_base = time_dict.get(units_from, None) # Conversion to seconds
+        units_to_base = time_dict.get(units_to, None) # Conversion from seconds
+
+        value = convert_time(value, units_from_base, units_to_base)
+        return str(round(value, decimal_places)) + units_to
+
+    return False
+
 # DISTANCE CONVERSION
 # Convert Metric units to Imperial units
 def metric_to_imperial(value, metric_base, imperial_base, imperial_multiplier):
     return value * metric_base * imperial_multiplier * imperial_base
 # Convert Imperial units to Metric units
 def imperial_to_metric(value, metric_base, imperial_base, metric_multiplier):
-    # 7.628 in / 1 * metric_multiplier / 1
     return value * imperial_base * metric_multiplier / metric_base
 
 def check_metric_imperial(value, units_from, units_to, decimal_places):
@@ -91,8 +108,6 @@ def check_metric_imperial(value, units_from, units_to, decimal_places):
 
 # Takes in a parameter s, the value and the unit to convert from/to
 def convert_units(s):
-    s = s.lower() # Convert to lower case for easier use
-
     # Ensure valid input: value/unitfrom/unitto
     try:
         s.index('/')
@@ -116,20 +131,26 @@ def convert_units(s):
     if units_from == units_to:
         return str(value) + units_to
 
-    # Check for Metric and Imperial units
-    metric_imperial_response = check_metric_imperial(value, units_from, units_to, decimal_places)
-    if metric_imperial_response == False:
-        # Get proper method for conversion
-        conversion_method = units_from + '_to_' + units_to # Name of method to use
-        thismodule = sys.modules[__name__] # This module as object
+    responses = [
+        check_time(value, units_from, units_to, decimal_places), # Time units
+        check_metric_imperial(value, units_from, units_to, decimal_places) # Metric and Imperial units
+    ]
 
-        try:
-            value = getattr(thismodule, conversion_method)(value)
-            return str(round(value, decimal_places)) + units_to
-        except AttributeError:
-            return 'Incompatible units.'
-    else:
-        return metric_imperial_response
+    for response in responses:
+        if response != False:
+            return response
+
+    # Check the rest of the conversion factors
+    # Get proper method for conversion
+    conversion_method = units_from + '_to_' + units_to # Name of method to use
+    thismodule = sys.modules[__name__] # This module as object
+
+    try:
+        value = getattr(thismodule, conversion_method)(value)
+        return str(round(value, decimal_places)) + units_to
+    except AttributeError:
+        return 'Incompatible units.'
+
 
 # The rest of the code is just here for testing purposes
 # Information about the script

@@ -1,6 +1,8 @@
-# TODO Make this dictionary usable for volume (liters) and mass (grams) as well
+import math
+
 class dictionary:
 
+    # Metric and Imperial systems
     __metric_dict = {
         'E': 1000000000000000000,
         'P': 1000000000000000,
@@ -51,6 +53,63 @@ class dictionary:
         'gr': .00014285714
     }
 
+    # Time
+    # __time_dict = {
+    #     'Ys': math.pow(10, 24),
+    #     'Zs': math.pow(10, 21),
+    #     'Es': math.pow(10, 18),
+    #     'Ps': math.pow(10, 15),
+    #     'Ts': math.pow(10, 12),
+    #     'Gs': math.pow(10, 9),
+    #     ('yr', 'yrs', 'year', 'years'): 31540000,
+    #     ('mo', 'mos', 'month', 'months'): 2628000,
+    #     'Ms': math.pow(10, 6),
+    #     ('wk', 'week', 'weeks'): 604800,
+    #     'day': 86400,
+    #     ('hr', 'hour', 'hours'): 3600,
+    #     'ks': 1000,
+    #     ('min', 'minutes'): 60,
+    #     ('s', 'sec', 'second', 'seconds'): 1,
+    #     'ds': .1,
+    #     'cs': .01,
+    #     'ms': .001,
+    #     'µs': math.pow(10, -6),
+    #     'ns': math.pow(10, -9),
+    #     'ps': math.pow(10, -12),
+    #     'fs': math.pow(10, -15),
+    #     'as': math.pow(10, -18),
+    #     'zs': math.pow(10, -21),
+    #     'ys': math.pow(10, -24)
+    # }
+
+    __time_dict = {
+        'Ys': math.pow(10, 24),
+        'Zs': math.pow(10, 21),
+        'Es': math.pow(10, 18),
+        'Ps': math.pow(10, 15),
+        'Ts': math.pow(10, 12),
+        'Gs': math.pow(10, 9),
+        'yr': 31540000,
+        'mo': 2628000,
+        'Ms': math.pow(10, 6),
+        'wk': 604800,
+        'day': 86400,
+        'hr': 3600,
+        'ks': 1000,
+        'min': 60,
+        's': 1,
+        'ds': .1,
+        'cs': .01,
+        'ms': .001,
+        'µs': math.pow(10, -6),
+        'ns': math.pow(10, -9),
+        'ps': math.pow(10, -12),
+        'fs': math.pow(10, -15),
+        'as': math.pow(10, -18),
+        'zs': math.pow(10, -21),
+        'ys': math.pow(10, -24)
+    }
+
     def metric_dict(self):
         return self.__metric_dict
     def imperial_dist_dict(self):
@@ -59,3 +118,5 @@ class dictionary:
         return self.__imperial_vol_dict
     def imperial_mass_dict(self):
         return self.__imperial_mass_dict
+    def time_dict(self):
+        return self.__time_dict
