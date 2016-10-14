@@ -62,6 +62,16 @@ def w_to_btu(watts):
 def w_to_cal(watts):
     return watts * 0.23885 #Precision of 5 significant digits
 
+# FORCE CONVERSION
+
+# Newtons to Dynes (dyn)
+def n_to_dyn(newtons):
+    return newtons * 10^5
+
+# Newtons to Poundals (pdl)
+def n_to_pdl(newtons):
+    return newtons * 7,23301 #Precision of 5 significant digits
+
 # TIME CONVERSION
 def convert_time(value, units_from_base, units_to_base):
     return value * units_from_base / units_to_base
