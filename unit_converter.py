@@ -82,6 +82,32 @@ def w_to_cal(watts):
     return watts * 0.23885 #Precision of 5 significant digits
 
 
+# PRESSURE CONVERSION
+# At to pa
+def at_to_pa(value):
+    return value / 1.01971621298E-5
+
+
+# At to bar
+def at_to_bar(value):
+    return value / 1.0197
+
+
+# At to atm
+def at_to_atm(value):
+    return value / 1.03322755477
+
+
+# At to torr
+def at_to_torr(value):
+    return value / 0.00135950982242
+
+
+# At to psi
+def at_to_psi(value):
+    return value / 0.0703069578296
+
+
 # TIME CONVERSION
 def convert_time(value, units_from_base, units_to_base):
     return value * units_from_base / units_to_base
@@ -224,24 +250,35 @@ def convert_units(s):
     except AttributeError:
         return 'Incompatible units.'
 
+
 # SPEED CONVERSION
-# kilometers/hour(kph) and miles/hour (mph)
+# Kilometers/hour (kph) and miles/hour (mph)
+
 def kph_to_mph(value):
     return value * 0.6214
+
+
 def mph_to_kph(value):
     return value * 1.609
 
-# kilometers/hour and knots
+
+# Kilometers/hour and knots
 def kph_to_kt(value):
     return value * 0.534
+
+
 def kt_to_kph(value):
     return value * 1.852
+
 
 # knots and miles/hour
 def kt_to_mph(value):
     return kt_to_kph(kph_to_mph(value))
+
+
 def mph_to_kt(value):
     return mph_to_kph(kph_to_kt(value))
+
 
 # The rest of the code is just here for testing purposes
 # Information about the script
