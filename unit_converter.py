@@ -83,29 +83,130 @@ def w_to_cal(watts):
 
 
 # PRESSURE CONVERSION
-# At to pa
+# Converts units of pressure: Pa, Bar, atm, Torr, psi
+# at to pa
 def at_to_pa(value):
     return value / 1.01971621298E-5
 
 
-# At to bar
+# at to bar
 def at_to_bar(value):
     return value / 1.0197
 
 
-# At to atm
+# at to atm
 def at_to_atm(value):
     return value / 1.03322755477
 
 
-# At to torr
+# at to torr
 def at_to_torr(value):
     return value / 0.00135950982242
 
 
-# At to psi
+# at to psi
 def at_to_psi(value):
     return value / 0.0703069578296
+
+
+# Pa to bar
+def Pa_to_bar(value):
+    return value * 0.00001
+
+
+# Bar to Pa
+def bar_to_Pa(value):
+    return value / 0.00001
+
+
+# Pa to atm
+def Pa_to_atm(value):
+    return value / 101325
+
+
+# atm to Pa
+def atm_to_Pa(value):
+    return value * 101325
+
+
+# Pa to Torr
+def Pa_to_Torr(value):
+    return value * 0.00750062
+
+
+# Torr to Pa
+def Torr_to_Pa(value):
+    return value / 0.00750062
+
+
+# Pa to psi
+def Pa_to_psi(value):
+    return value / 6894.76
+
+
+# psi to Pa
+def psi_to_Pa(value):
+    return value * 6894.76
+
+
+# bar to atm
+def bar_to_atm(value):
+    return value / 1.01325
+
+
+# atm to bar
+def atm_to_bar(value):
+    return value * 1.01325
+
+
+# bar to Torr
+def bar_to_Torr(value):
+    return value * 750.062
+
+
+# Torr to bar
+def Torr_to_bar(value):
+    return value / 750.062
+
+
+# bar to psi
+def bar_to_psi(value):
+    return value * 14.5038
+
+
+# psi to bar
+def psi_to_bar(value):
+    return value / 14.5038
+
+
+# atm to Torr
+def atm_to_Torr(value):
+    return value * 760
+
+
+# Torr to atm
+def Torr_to_atm(value):
+    return value / 760
+
+
+# atm to psi
+def atm_to_psi(value):
+    return value * 14.6959
+
+
+# psi to atm
+def psi_to_atm(value):
+    return value / 14.6959
+
+
+# Torr to psi
+def Torr_to_psi(value):
+    return value / 51.7149
+
+
+# psi to Torr
+def psi_to_Torr(value):
+    return value * 51.7149
 
 
 # TIME CONVERSION
