@@ -151,6 +151,24 @@ def convert_units(s):
     except AttributeError:
         return 'Incompatible units.'
 
+# SPEED CONVERSION
+# kilometers/hour(kph) and miles/hour (mph)
+def kph_to_mph(value):
+    return value * 0.6214
+def mph_to_kph(value):
+    return value * 1.609
+
+# kilometers/hour and knots
+def kph_to_kt(value):
+    return value * 0.534
+def kt_to_kph(value):
+    return value * 1.852
+
+# knots and miles/hour
+def kt_to_mph(value):
+    return kt_to_kph(kph_to_mph(value))
+def mph_to_kt(value):
+    return mph_to_kph(kph_to_kt(value))
 
 # The rest of the code is just here for testing purposes
 # Information about the script
