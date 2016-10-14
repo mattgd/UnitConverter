@@ -74,12 +74,12 @@ def w_to_hp(watts):
 
 # Watts to BTUs per second (BTU/s)
 def w_to_btu(watts):
-    return watts * 0.00095 #Precision of 5 significant digits
+    return watts * 0.00095  # Precision of 5 significant digits
 
 
 # Watts to Calories per second (cal/s)
 def w_to_cal(watts):
-    return watts * 0.23885 #Precision of 5 significant digits
+    return watts * 0.23885  # Precision of 5 significant digits
 
 
 # PRESSURE CONVERSION
@@ -199,24 +199,24 @@ def check_metric_imperial(value, units_from, units_to, decimal_places):
     return False
 
 
+# Check if the input is valid
+def check_input(s):
+    if len(str(s).split('/')) == 3:
+        return True
+    else:
+        return False
+
+
 # Takes in a parameter s, the value and the unit to convert from/to
 def convert_units(s):
     # Ensure valid input: value/unitfrom/unitto
-    try:
-        s.index('/')
-    except ValueError:
-        return 'Invalid input. Format: value/unitfrom/unitto\n'
+    if not check_input(s):
+        return '[!] Invalid input. Format: value/unitfrom/unitto\n'
 
     # Extract the numeric value from the string
     value = float(s[0:s.index('/')])
     decimal_places = len(str(value)[str(value).index('.') + 1:])
     units = s[s.index('/') + 1:]  # Extract the units from the string
-
-    # Ensure valid units input: unitfrom/unitto
-    try:
-        units.index('/')
-    except ValueError:
-        return 'Invalid input. Format: value/unitfrom/unitto\n'
 
     # Everything before the slash is from
     units_from = units[0:units.index('/')]
@@ -248,7 +248,7 @@ def convert_units(s):
         value = getattr(thismodule, conversion_method)(value)
         return str(round(value, decimal_places)) + units_to
     except AttributeError:
-        return 'Incompatible units.'
+        return '[!] Incompatible units.'
 
 
 # SPEED CONVERSION
@@ -283,19 +283,19 @@ def mph_to_kt(value):
 # The rest of the code is just here for testing purposes
 # Information about the script
 print('Python unit converter by mattgd.\n \
-    Units supported:\n \
-    Circle: radians (r), degrees (d) \n \
-    Temperature: Celsius (c), Fahrenheit (f), and Kelvin (k) \n \
-    Speed: Kilometers/hour (kph), miles/hour (mph), knots(kt) .')
-print('Example entries: 1.345/r/d, 33/f/c, 2/mph/kph')
+    \nUnits supported:\n \
+    Circle\t\t: radians (r), degrees (d) \n \
+    Temperature\t: Celsius (c), Fahrenheit (f), and Kelvin (k) \n \
+    Speed\t\t: Kilometers/hour (kph), miles/hour (mph), knots(kt) .')
+print('\n\n[-] Example entries: 1.345/r/d, 33/f/c, 2/mph/kph')
 
 number = 0
 while number != 'exit':
     # Ask user for a number
-    number = input('Enter a value and units to covert from and to: ')
+    number = input('\n[*] Enter a value and units to convert from and to: ')
 
     if number == 'exit':
-        print('Program exited.')
+        print('[-] Program exited.')
         break
 
     # Display the converted number
