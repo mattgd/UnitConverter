@@ -28,6 +28,32 @@ def r_to_d(value):
 def d_to_r(value):
     return math.radians(value)
 
+# ELECTRIC CONVERSION
+
+# Watts to Amps
+def w_to_a(watts, volts):
+    return watts / volts
+
+# Watts to Volts
+def w_to_v(watts, amps):
+    return watts / amps
+
+# Watts to Ohms given Amps
+def w_to_o(watts, amps):
+    return watts / (amps * amps)
+
+# Watts to Ohms given Volts
+def w_to_o2(watts, volts):
+    return (volts * volts ) / watts
+
+# Watts to Joules given time
+def w_to_j(watts, seconds):
+    return watts * seconds
+
+# Watts to Horsepower
+def w_to_hp(watts):
+    return watts * 746
+
 # TIME CONVERSION
 def convert_time(value, units_from_base, units_to_base):
     return value * units_from_base / units_to_base
