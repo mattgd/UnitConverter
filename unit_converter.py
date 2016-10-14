@@ -54,6 +54,28 @@ def w_to_j(watts, seconds):
 def w_to_hp(watts):
     return watts * 746
 
+# PRESSURE CONVERSION
+
+# At to pa
+def at_to_pa(value):
+    return value / 1.01971621298E-5
+
+# At to bar
+def at_to_bar(value):
+    return value / 1.0197
+
+# At to atm
+def at_to_atm(value):
+    return value / 1.03322755477
+
+# At to torr
+def at_to_torr(value):
+    return value / 0.00135950982242
+
+# At to psi
+def at_to_psi(value):
+    return value / 0.0703069578296
+
 # TIME CONVERSION
 def convert_time(value, units_from_base, units_to_base):
     return value * units_from_base / units_to_base
@@ -181,7 +203,8 @@ def convert_units(s):
 # The rest of the code is just here for testing purposes
 # Information about the script
 print('Python unit converter by mattgd.\nUnits supported radians (r), degrees (d), Celsius (c), Fahrenheit (f), and Kelvin (k).')
-print('Example entries: 1.345rd, 33fc')
+print('Pressure units supported Technical Atmosphere (at) to Pascal (pa), Bar (bar), Standard Atmosphere (atm), Torr (torr) and Pounds per Square (psi).')
+print("Example entries: '1.345/r/d', '33/f/c'")
 
 number = 0
 while number != 'exit':
