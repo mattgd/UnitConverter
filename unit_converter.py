@@ -219,7 +219,7 @@ def n_to_dyn(newtons):
 
 # Newtons to Poundals (pdl)
 def n_to_pdl(newtons):
-    return newtons * 7,23301 #Precision of 5 significant digits
+    return newtons * 7.23301 #Precision of 5 significant digits
 
 # TIME CONVERSION
 def convert_time(value, units_from_base, units_to_base):
