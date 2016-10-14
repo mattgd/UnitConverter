@@ -54,6 +54,14 @@ def w_to_j(watts, seconds):
 def w_to_hp(watts):
     return watts * 746
 
+# Watts to BTUs per second (BTU/s)
+def w_to_btu(watts):
+    return watts * 0.00095 #Precision of 5 significant digits
+
+# Watts to Calories per second (cal/s)
+def w_to_cal(watts):
+    return watts * 0.23885 #Precision of 5 significant digits
+
 # TIME CONVERSION
 def convert_time(value, units_from_base, units_to_base):
     return value * units_from_base / units_to_base
