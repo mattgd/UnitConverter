@@ -2,7 +2,7 @@
 A unit conversion API module in Python.
 
 ###Requirements
-* **Python3**
+* **Python2 & above **
 
 ### Supported Units and Categories
 | Category    | Units                                                                                                                                                                                                                                                                                                                                                                                                                                    |
