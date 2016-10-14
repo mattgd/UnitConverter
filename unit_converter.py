@@ -130,6 +130,35 @@ def check_time(value, units_from, units_to, decimal_places):
     return False
 
 
+# SPEED CONVERSION
+# Kilometers/hour (kph) and miles/hour (mph)
+
+def kph_to_mph(value):
+    return value * 0.6214
+
+
+def mph_to_kph(value):
+    return value * 1.609
+
+
+# Kilometers/hour and knots
+def kph_to_kt(value):
+    return value * 0.534
+
+
+def kt_to_kph(value):
+    return value * 1.852
+
+
+# knots and miles/hour
+def kt_to_mph(value):
+    return kt_to_kph(kph_to_mph(value))
+
+
+def mph_to_kt(value):
+    return mph_to_kph(kph_to_kt(value))
+
+
 # DISTANCE CONVERSION
 # Convert Metric units to Imperial units
 def metric_to_imperial(value, metric_base, imperial_base, imperial_multiplier):
@@ -249,35 +278,6 @@ def convert_units(s):
         return str(round(value, decimal_places)) + units_to
     except AttributeError:
         return 'Incompatible units.'
-
-
-# SPEED CONVERSION
-# Kilometers/hour (kph) and miles/hour (mph)
-
-def kph_to_mph(value):
-    return value * 0.6214
-
-
-def mph_to_kph(value):
-    return value * 1.609
-
-
-# Kilometers/hour and knots
-def kph_to_kt(value):
-    return value * 0.534
-
-
-def kt_to_kph(value):
-    return value * 1.852
-
-
-# knots and miles/hour
-def kt_to_mph(value):
-    return kt_to_kph(kph_to_mph(value))
-
-
-def mph_to_kt(value):
-    return mph_to_kph(kph_to_kt(value))
 
 
 # The rest of the code is just here for testing purposes
