@@ -391,6 +391,7 @@ print('Python unit converter by mattgd.\n \
     Temperature\t: Celsius (c), Fahrenheit (f), and Kelvin (k) \n \
     Speed\t\t: Kilometers/hour (kph), miles/hour (mph), knots(kt) .')
 print('\n\n[-] Example entries: 1.345/r/d, 33/f/c, 2/mph/kph')
+print('\n\n[-]To close type "exit"')
 
 number = 0
 while number != 'exit':
