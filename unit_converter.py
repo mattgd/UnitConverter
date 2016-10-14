@@ -112,10 +112,6 @@ def Pa_to_Bar(value):
     return value * 0.00001
 def Bar_to_Pa(value):
     return value / 0.00001
-def Pa_to_At(value):
-    
-def at_to_Pa(value):
-    
 def Pa_to_Atm(value):
     return value / 101325
 def Atm_to_Pa(value):
@@ -128,10 +124,6 @@ def Pa_to_Psi(value):
     return value / 6894.76
 def Psi_to_Pa(value):
     return value * 6894.76
-def Bar_to_At(value):
-    
-def At_to_Bar(value):
-
 def Bar_to_Atm(value):
     return value / 1.01325
 def Atm_to_Bar(value):
