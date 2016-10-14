@@ -298,7 +298,7 @@ while number != 'exit':
         pass
 
     # Ask user for a number
-    number = input('\n[*] Enter a value and units to convert from and to: ')
+    number = raw_input('\n[*] Enter a value and units to convert from and to: ')
 
     if number == 'exit':
         print('[-] Program exited.')
