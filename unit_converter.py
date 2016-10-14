@@ -106,6 +106,57 @@ def check_metric_imperial(value, units_from, units_to, decimal_places):
 
     return False
 
+# PRESSURE CONVERSION
+# Converts units of pressure: Pa, Bar, atm, Torr, psi
+def Pa_to_Bar(value):
+    return value * 0.00001
+def Bar_to_Pa(value):
+    return value / 0.00001
+def Pa_to_At(value):
+    
+def at_to_Pa(value):
+    
+def Pa_to_Atm(value):
+    return value / 101325
+def Atm_to_Pa(value):
+    return value * 101325
+def Pa_to_Torr(value):
+    return value * 0.00750062
+def Torr_to_Pa(value):
+    return value / 0.00750062
+def Pa_to_Psi(value):
+    return value / 6894.76
+def Psi_to_Pa(value):
+    return value * 6894.76
+def Bar_to_At(value):
+    
+def At_to_Bar(value):
+
+def Bar_to_Atm(value):
+    return value / 1.01325
+def Atm_to_Bar(value):
+    return value * 1.01325
+def Bar_to_Torr(value):
+    return value * 750.062
+def Torr_to_Bar(value):
+    return value / 750.062
+def Bar_to_Psi(value):
+    return value * 14.5038
+def Psi_to_Bar(value):
+    return value / 14.5038
+def Atm_to_Torr(value):
+    return value * 760
+def Torr_to_Atm(value):
+    return value / 760
+def Atm_to_Psi(value):
+    return value * 14.6959
+def Psi_to_Atm(value):
+    return value / 14.6959
+def Torr_to_Psi(value):
+    return value / 51.7149
+def Psi_to_Torr(value):
+    return value * 51.7149
+
 # Takes in a parameter s, the value and the unit to convert from/to
 def convert_units(s):
     # Ensure valid input: value/unitfrom/unitto
