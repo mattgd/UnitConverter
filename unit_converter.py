@@ -291,6 +291,12 @@ print('\n\n[-] Example entries: 1.345/r/d, 33/f/c, 2/mph/kph')
 
 number = 0
 while number != 'exit':
+    # Bind raw_input to input for both Python2 and Python3 compatibility
+    try:
+        input = raw_input
+    except NameError:
+        pass
+
     # Ask user for a number
     number = input('\n[*] Enter a value and units to convert from and to: ')
 
