@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 import math
+
 
 class dictionary:
 
@@ -112,11 +114,15 @@ class dictionary:
 
     def metric_dict(self):
         return self.__metric_dict
+
     def imperial_dist_dict(self):
         return self.__imperial_dist_dict
+
     def imperial_vol_dict(self):
         return self.__imperial_vol_dict
+
     def imperial_mass_dict(self):
         return self.__imperial_mass_dict
+
     def time_dict(self):
         return self.__time_dict
