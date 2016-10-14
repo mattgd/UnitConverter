@@ -172,8 +172,12 @@ def mph_to_kt(value):
 
 # The rest of the code is just here for testing purposes
 # Information about the script
-print('Python unit converter by mattgd.\nUnits supported radians (r), degrees (d), Celsius (c), Fahrenheit (f), and Kelvin (k).')
-print('Example entries: 1.345rd, 33fc')
+print('Python unit converter by mattgd.\n \
+    Units supported:\n \
+    Circle: radians (r), degrees (d) \n \
+    Temperature: Celsius (c), Fahrenheit (f), and Kelvin (k) \n \
+    Speed: Kilometers/hour (kph), miles/hour (mph), knots(kt) .')
+print('Example entries: 1.345/r/d, 33/f/c, 2/mph/kph')
 
 number = 0
 while number != 'exit':
