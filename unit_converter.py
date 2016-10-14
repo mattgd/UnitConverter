@@ -292,7 +292,7 @@ print('\n\n[-] Example entries: 1.345/r/d, 33/f/c, 2/mph/kph')
 number = 0
 while number != 'exit':
     # Ask user for a number
-    number = input('\n[*] Enter a value and units to convert from and to: ')
+    number = raw_input('\n[*] Enter a value and units to convert from and to: ')
 
     if number == 'exit':
         print('[-] Program exited.')
