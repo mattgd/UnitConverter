@@ -42,6 +42,7 @@ def d_to_r(value):
 
 
 # ELECTRIC CONVERSION
+
 # Watts to Amps
 def w_to_a(watts, volts):
     return watts / volts
@@ -84,6 +85,7 @@ def w_to_cal(watts):
 
 # PRESSURE CONVERSION
 # Converts units of pressure: Pa, Bar, atm, Torr, psi
+
 # at to pa
 def at_to_pa(value):
     return value / 1.01971621298E-5
