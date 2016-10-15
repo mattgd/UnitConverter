@@ -272,15 +272,35 @@ def mph_to_kt(value):
     return mph_to_kph(kph_to_kt(value))
 
 
-# DISTANCE CONVERSION
+# DISTANCE, VOLUME, AND MASS/WEIGHT CONVERSION
 # Convert Metric units to Imperial units
 def metric_to_imperial(value, metric_base, imperial_base, imperial_multiplier):
     return value * metric_base * imperial_multiplier * imperial_base
+
+
 # Convert Imperial units to Metric units
-
-
 def imperial_to_metric(value, metric_base, imperial_base, metric_multiplier):
     return value * imperial_base * metric_multiplier / metric_base
+
+
+def metric_to_metric(value, metric_base, metric_multiplier):
+    return value * metric_base * metric_multiplier
+
+
+# DIGITAL STORAGE CONVERSION
+def check_digital_storage(value, units_from, units_to, decimal_places):
+    dict = unit_dictionary.dictionary()  # Dictionary object
+    digital_storage_dict = dict.digital_storage_dict()  # Universal Metric unit dictionary
+
+    # Digital storage conversions
+    if units_from in digital_storage_dict and units_to in digital_storage_dict:
+        from_base = digital_storage_dict.get(units_from, None)
+        to_base = digital_storage_dict.get(units_to, None)
+
+        value = value * from_base / to_base
+        return str(round(value, decimal_places)) + units_to
+
+    return False
 
 
 def check_metric_imperial(value, units_from, units_to, decimal_places):
@@ -374,7 +394,13 @@ def convert_units(s):
             value,
             units_from,
             units_to,
-            decimal_places)  # Metric and Imperial units
+            decimal_places),  # Metric and Imperial units
+        check_digital_storage(
+            value,
+            units_from,
+            units_to,
+            decimal_places
+        ) # Digital storage units
     ]
 
     for response in responses:

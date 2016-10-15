@@ -54,6 +54,18 @@ class dictionary:
         'dr': .00390625,
         'gr': .00014285714
     }
+    __digital_storage_dict = {
+        'YB': math.pow(2, 80),
+        'ZB': math.pow(2, 70),
+        'EB': math.pow(2, 60),
+        'PB': math.pow(2, 50),
+        'TB': math.pow(2, 40),
+        'GB': math.pow(2, 30),
+        'MB': math.pow(2, 20),
+        'kB': math.pow(2, 10),
+        'byte': 8,
+        'bit': 1
+    }
 
     # Time
     # __time_dict = {
@@ -126,6 +138,10 @@ class dictionary:
 
     def imperial_mass_dict(self):
         return self.__imperial_mass_dict
+
+
+    def digital_storage_dict(self):
+        return self.__digital_storage_dict
 
 
     def time_dict(self):
