@@ -1,8 +1,9 @@
-# UnitConverter
+<!--# UnitConverter-->
+<h1><a href="https://github.com/mattgd/UnitConverter" target="_blank"><img width="175" src="http://www.mattd.xyz/unitconverter/logo-color.png"></a></h1>
 A unit conversion API module in Python.
 
 ###Requirements
-* **Python2 & above **
+* **Python2 & above**
 
 ### Supported Units and Categories
 | Category    | Units                                                                                                                                                                                                                                                                                                                                                                                                                                    |
@@ -16,6 +17,8 @@ A unit conversion API module in Python.
 | Pressure          | pascal (pa), torr (torr), pounds per square inch (psi), bar (bar), technical atmosphere (at), atmosphere (atm)                                                                                                                                                                                                                                                                                                                           |
 | Energy            | watt (w), joule (j), horsepower (hp), Calorie (cal), British thermal unit (btu)                                                                                                                                                                                                                                                                                                                                                          |
 | Speed             | kilometers per hour (kph), miles per hour (mph), knots (kt)                                                                                                                                                                                                                                                                                                                                                                              |
+| Force             | Newton (N), dyne (dyn), Kilogram-Force (kp), Poundal (pdl)                                                                                                                                                                                                                                                                                                                                                                               |
+| Digital Storage   | bit (bit), byte (byte), kilobyte (kB), megabyte (MB), gigabyte (GB), terabyte (TB), petabyte (PB), exabyte (EB), zettabyte (ZB), yottabyte (YB)                                                                                                                                                                                                                                                                |
 
 ###Examples
 
@@ -34,3 +37,18 @@ Enter a value and units to covert from and to: 3/kt/mph
 Enter a value and units to covert from and to: 4/kt/mph
 4.6mph
 ```
+
+###Contributing to This Repository
+
+If you'd like to contribute, feel free to make changes or additions and submit a pull request. Below are two full example methods:
+```
+# Watts to Horsepower
+def w_to_hp(watts):
+    return watts * 746
+```
+```
+# Pa to psi
+def Pa_to_psi(value):
+    return value / 6894.76
+```
+Note that the method name should include the proper abbreviation casing instead of conventional casing for Python. Also, you may use the name of the unit being converted from as the variable, or it can just be named "value" instead.

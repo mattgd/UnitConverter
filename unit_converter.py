@@ -211,6 +211,56 @@ def psi_to_Torr(value):
     return value * 51.7149
 
 
+# FORCE CONVERSION
+
+# Newtons to Dynes (dyn)
+def n_to_dyn(newtons):
+    return newtons * 10^5
+
+# Dynes to Newtons (n)
+def dyn_to_n(dynes):
+    return dynes * 0.00001 #Precision of 5 significant digits
+
+# Newtons to Poundals (pdl)
+def n_to_pdl(newtons):
+    return newtons * 7.23301 #Precision of 5 significant digits
+
+# Poundals to Newtons (n)
+def pdl_to_n(poundals):
+    return poundals * 0.13826 #Precision of 5 significant digits
+
+# Newtons to Kilogram-Force (kp)
+def n_to_kp(newtons):
+    return newtons * 0.10197 #Precision of 5 significant digits
+
+# Kilogram-Force to Newtons
+def kp_to_n(kps):
+    return kps * 9.80665 #Precision of 5 significant digits
+
+# Dyne to Kilogram-Force (kp)
+def dyn_to_kp(dynes):
+    return n_to_kp(dyn_to_n(dynes))
+
+# Kilogram-Force to Dyne (dyn)
+def kp_to_dyn(kps):
+    return n_to_dyn(kp_to_n(kps))
+
+# Dynes to Poundals (pdl)
+def dyn_to_pdl(dynes):
+    return n_to_pdl(dyn_to_n(dynes))
+
+# Poundals to Dynes (dyn)
+def pdl_to_dyn(poundals):
+    return n_to_dyn(pdl_to_n(poundals))
+
+# Kilogram-Force to Poundals (pdl)
+def kp_to_pdl(kps):
+    return n_to_pdl(kp_to_n(kps))
+
+# Poundals to Kilogram-Force (kp)
+def pdl_to_kp(poundals):
+    return n_to_kp(pdl_to_n(poundals))
+
 # TIME CONVERSION
 def convert_time(value, units_from_base, units_to_base):
     return value * units_from_base / units_to_base
@@ -262,15 +312,35 @@ def mph_to_kt(value):
     return mph_to_kph(kph_to_kt(value))
 
 
-# DISTANCE CONVERSION
+# DISTANCE, VOLUME, AND MASS/WEIGHT CONVERSION
 # Convert Metric units to Imperial units
 def metric_to_imperial(value, metric_base, imperial_base, imperial_multiplier):
     return value * metric_base * imperial_multiplier * imperial_base
+
+
 # Convert Imperial units to Metric units
-
-
 def imperial_to_metric(value, metric_base, imperial_base, metric_multiplier):
     return value * imperial_base * metric_multiplier / metric_base
+
+
+def metric_to_metric(value, metric_base, metric_multiplier):
+    return value * metric_base * metric_multiplier
+
+
+# DIGITAL STORAGE CONVERSION
+def check_digital_storage(value, units_from, units_to, decimal_places):
+    dict = unit_dictionary.dictionary()  # Dictionary object
+    digital_storage_dict = dict.digital_storage_dict()  # Universal Metric unit dictionary
+
+    # Digital storage conversions
+    if units_from in digital_storage_dict and units_to in digital_storage_dict:
+        from_base = digital_storage_dict.get(units_from, None)
+        to_base = digital_storage_dict.get(units_to, None)
+
+        value = value * from_base / to_base
+        return str(round(value, decimal_places)) + units_to
+
+    return False
 
 
 def check_metric_imperial(value, units_from, units_to, decimal_places):
@@ -364,7 +434,13 @@ def convert_units(s):
             value,
             units_from,
             units_to,
-            decimal_places)  # Metric and Imperial units
+            decimal_places),  # Metric and Imperial units
+        check_digital_storage(
+            value,
+            units_from,
+            units_to,
+            decimal_places
+        ) # Digital storage units
     ]
 
     for response in responses:
