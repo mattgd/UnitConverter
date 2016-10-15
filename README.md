@@ -1,6 +1,6 @@
 <p><a href="https://github.com/mattgd/UnitConverter" target="_blank"><img width="150" src="./.logos/logo-color.png"></a></p>
 
-# UnitConverter
+<!--# UnitConverter-->
 A unit conversion API module in Python.
 
 ###Requirements
