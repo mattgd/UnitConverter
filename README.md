@@ -37,3 +37,18 @@ Enter a value and units to covert from and to: 3/kt/mph
 Enter a value and units to covert from and to: 4/kt/mph
 4.6mph
 ```
+
+###Contributing to This Repository
+
+If you'd like to contribute, feel free to make changes or additions and submit a pull request. Below are two full example methods:
+```
+# Watts to Horsepower
+def w_to_hp(watts):
+    return watts * 746
+```
+```
+# Pa to psi
+def Pa_to_psi(value):
+    return value / 6894.76
+```
+Note that the method name should include the proper abbreviation casing instead of conventional casing for Python. Also, you may use the name of the unit being converted from as the variable, or it can just be named "value" instead.
