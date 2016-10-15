@@ -1,4 +1,4 @@
-<p><a href="https://github.com/mattgd/UnitConverter" target="_blank"><img width="150" src=".logos/logo.png"></a></p>
+<p><a href="https://github.com/mattgd/UnitConverter" target="_blank"><img width="150" src="./.logos/logo.png"></a></p>
 
 # UnitConverter
 A unit conversion API module in Python.
