@@ -8,7 +8,7 @@ A unit conversion API module in Python.
 ### Supported Units and Categories
 | Category    | Units                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 |-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Angles of Circles | radians (r), degrees (d)                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Angles of Circles | radians (rad), degrees (deg)                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | Temperature       | Celsius (C), Fahrenheit (F), Kelvins (K)                                                                                                                                                                                                                                                                                                                                                                                                 |
 | Distance          | Metric distances: attometer (am), femtometer (fm), picometer (pm), nanometer (nm), micrometer (μm), milimeter (mm), centimeter (cm), decimeter (dm), meter (m), decameter (dam), hectometer (hm), kilometer (km), megameter (Mm), gigameter (Gm), terameter (Tm), petameter (Pm), exameter (Em) Imperial distances: thou (th), inch (in), link (li), foot (ft), yard (yd), rod (rod), chain (ch), furlong (fur), mile (mi), league (lea) |
 | Volume            | Metric volumes: attoliter (al) to exaliter (El) Imperial volumes: fluid ounce (floz), gill (gi), pint (pt), quart (qt), gallon (gal)                                                                                                                                                                                                                                                                                                     |
@@ -26,16 +26,24 @@ A unit conversion API module in Python.
 UnitConverter $ python unit_converter.py
 Python unit converter by mattgd.
      Units supported:
-     Circle: radians (r), degrees (d)
+     Circle: radians (rad), degrees (deg)
      Temperature: Celsius (c), Fahrenheit (f), and Kelvin (k)
      Speed: Kilometers/hour (kph), miles/hour (mph), knots(kt) .
-Example entries: 1.345/r/d, 33/f/c, 2/mph/kph
-Enter a value and units to covert from and to: 100/f/c
-37.8c
-Enter a value and units to covert from and to: 3/kt/mph
-3.5mph
-Enter a value and units to covert from and to: 4/kt/mph
-4.6mph
+Example entries: 1.345/rad/deg, 33/f/c, 2/mph/kph
+Enter a unit to convert from: F
+Enter a unit to convert to: C
+Enter a value to convert from F to C:
+37.8 °C
+Enter a unit to convert from: kt
+Enter a unit to convert to: mph
+Enter a value to convert from Kn to mph: 3
+3.5 mph
+Enter a unit to convert from: W
+Enter a unit to convert to: O
+Enter a value to convert from W to Ω: 12
+Enter an additional unit (choose between ['A', 'V']): V
+Enter the value: 12
+12 Ω
 ```
 
 ###Contributing to This Repository
@@ -51,4 +59,8 @@ def w_to_hp(watts):
 def Pa_to_psi(value):
     return value / 6894.76
 ```
-Note that the method name should include the proper abbreviation casing instead of conventional casing for Python. Also, you may use the name of the unit being converted from as the variable, or it can just be named "value" instead.
+Please create new converter files for new conversion sections and use existing ones for the conversion.
+
+If you have created a new file for new conversion sections don't forget to include all functions into the `__init__.py` in the `converters` module and create an entry in the `UNITS` array in the `converters.Converter` file
+
+Note that the method name should include the proper abbreviation casing instead of conventional casing for Python. Also, you may use the name of the unit being converted from as the variable.
