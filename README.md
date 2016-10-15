@@ -1,4 +1,5 @@
-# UnitConverter
+<!--# UnitConverter-->
+<h1><a href="https://github.com/mattgd/UnitConverter" target="_blank"><img width="175" src="http://www.mattd.xyz/unitconverter/logo-color.png"></a></h1>
 A unit conversion API module in Python.
 
 ###Requirements
@@ -16,7 +17,7 @@ A unit conversion API module in Python.
 | Pressure          | pascal (pa), torr (torr), pounds per square inch (psi), bar (bar), technical atmosphere (at), atmosphere (atm)                                                                                                                                                                                                                                                                                                                           |
 | Energy            | watt (w), joule (j), horsepower (hp), Calorie (cal), British thermal unit (btu)                                                                                                                                                                                                                                                                                                                                                          |
 | Speed             | kilometers per hour (kph), miles per hour (mph), knots (kt)                                                                                                                                                                                                                                                                                                                                                                              |
-| Force             | Newton (N), dyne (dyn)                                                                                                                                                                                                                                                                                                                                                                               |
+| Force             | Newton (N), dyne (dyn), Kilogram-Force (kp), Poundal (pdl)                                                                                                                                                                                                                                                                                                                                                                               |
 
 ###Examples
 
