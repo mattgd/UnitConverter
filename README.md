@@ -1,4 +1,5 @@
-# UnitConverter
+<!--# UnitConverter-->
+<h1><a href="https://github.com/mattgd/UnitConverter" target="_blank"><img width="175" src="./.logos/logo-color.png"></a></h1>
 A unit conversion API module in Python.
 
 ###Requirements
