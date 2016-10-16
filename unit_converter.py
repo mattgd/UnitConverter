@@ -131,12 +131,12 @@ def convert_units(value, from_unit, to_unit, **args):
     :return:
     """
 
-    # check if units can be converted
+    # Check if units can be converted
     if not can_convert(from_unit, to_unit):
         return '[!] Units cannot be converted\n'
 
     # Extract the numeric value from the string
-    decimal_places = 2 # set the default value of precision
+    decimal_places = 2 # Set the default value of precision
     if "." in str(value):
         decimal_places = len(str(value)[str(value).index('.') + 1:])
 

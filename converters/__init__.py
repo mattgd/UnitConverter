@@ -4,7 +4,7 @@ from ConversionError import ConversionError
 from RequireAdditionalParamError import RequireAdditionalParamError
 
 # import all converters (all methods) to call them here
-from TempertatureConverter import *
+from TemperatureConverter import *
 from CircleConverter import *
 from ElectricConverter import *
 from PressureConverter import *
