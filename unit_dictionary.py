@@ -2,7 +2,7 @@
 import math
 
 
-class dictionary:
+class Dictionary:
     # Metric and Imperial systems
     __metric_dict = {
         'E': 1000000000000000000,
@@ -135,10 +135,8 @@ class dictionary:
     def imperial_mass_dict(self):
         return self.__imperial_mass_dict
 
-
     def digital_storage_dict(self):
         return self.__digital_storage_dict
-
 
     def time_dict(self):
         return self.__time_dict

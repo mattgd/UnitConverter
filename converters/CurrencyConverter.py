@@ -15,7 +15,7 @@ def cur_to_cur(money, from_unit, to_unit):
     :return: Converted money in to_unit
     """
     session = requests.Session()
-    session.trust_env = False # disable proxy settings
+    session.trust_env = False  # disable proxy settings
 
     response = session.get(_build_convert_url(from_unit, to_unit))
     if response.ok:

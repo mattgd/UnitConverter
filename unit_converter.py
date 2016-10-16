@@ -11,8 +11,8 @@ def convert_time(value, units_from_base, units_to_base):
 
 
 def check_time(value, units_from, units_to, decimal_places):
-    dict = unit_dictionary.dictionary()  # Dictionary object
-    time_dict = dict.time_dict()  # Time unit dictionary
+    dictionary = unit_dictionary.Dictionary()  # Dictionary object
+    time_dict = dictionary.time_dict()  # Time unit dictionary
 
     # Metric and Imperial distances
     if units_from in time_dict and units_to in time_dict:
@@ -44,8 +44,8 @@ def metric_to_metric(value, metric_base, metric_multiplier):
 
 # DIGITAL STORAGE CONVERSION
 def check_digital_storage(value, units_from, units_to, decimal_places):
-    dict = unit_dictionary.dictionary()  # Dictionary object
-    digital_storage_dict = dict.digital_storage_dict()  # Universal Metric unit dictionary
+    dictionary = unit_dictionary.Dictionary()  # Dictionary object
+    digital_storage_dict = dictionary.digital_storage_dict()  # Universal Metric unit dictionary
 
     # Digital storage conversions
     if units_from in digital_storage_dict and units_to in digital_storage_dict:
@@ -59,11 +59,11 @@ def check_digital_storage(value, units_from, units_to, decimal_places):
 
 
 def check_metric_imperial(value, units_from, units_to, decimal_places):
-    dict = unit_dictionary.dictionary()  # Dictionary object
-    metric_dict = dict.metric_dict()  # Universal Metric unit dictionary
-    imperial_dist_dict = dict.imperial_dist_dict()  # Imperial length dictionary
-    imperial_vol_dict = dict.imperial_vol_dict()  # Imperial volume dictionary
-    imperial_mass_dict = dict.imperial_mass_dict()  # Imperial mass dictionary
+    dictionary = unit_dictionary.Dictionary()  # Dictionary object
+    metric_dict = dictionary.metric_dict()  # Universal Metric unit dictionary
+    imperial_dist_dict = dictionary.imperial_dist_dict()  # Imperial length dictionary
+    imperial_vol_dict = dictionary.imperial_vol_dict()  # Imperial volume dictionary
+    imperial_mass_dict = dictionary.imperial_mass_dict()  # Imperial mass dictionary
 
     # Removes the type of conversion: length (m), volume (l), mass (g)
     metric_units_from = units_from[
@@ -156,7 +156,7 @@ def convert_units(value, from_unit, to_unit, **args):
             from_unit,
             to_unit,
             decimal_places
-        ) # Digital storage units
+        )  # Digital storage units
     ]
 
     for response in responses:
@@ -195,27 +195,29 @@ def input_dialog():
 
     return from_unit, to_unit, value
 
-# The rest of the code is just here for testing purposes
-# Information about the script
-print('Python unit converter by mattgd.\n \
-    \nUnits supported:\n \
-    Circle\t\t: radians (rad), degrees (deg) \n \
-    Temperature\t: Celsius (c), Fahrenheit (f), and Kelvin (k) \n \
-    Speed\t\t: Kilometers/hour (kph), miles/hour (mph), knots(kt) .')
-print('\n\n[-] Example entries: 1.345/rad/degrees, 33/f/c, 2/mph/kph')
-print('\n\n[-] To close type "exit"')
 
-number = 0
-while number != 'exit':
-    # Bind raw_input to input for both Python2 and Python3 compatibility
-    try:
-        input = raw_input
-    except NameError:
-        pass
+if __name__ == '__main__':
+    # The rest of the code is just here for testing purposes
+    # Information about the script
+    print('Python unit converter by mattgd.\n \
+        \nUnits supported:\n \
+        Circle\t\t: radians (rad), degrees (deg) \n \
+        Temperature\t: Celsius (c), Fahrenheit (f), and Kelvin (k) \n \
+        Speed\t\t: Kilometers/hour (kph), miles/hour (mph), knots(kt) .')
+    print('\n\n[-] Example entries: 1.345/rad/degrees, 33/f/c, 2/mph/kph')
+    print('\n\n[-] To close type "exit"')
 
-    # Ask user for a number
-    from_unit, to_unit, value = input_dialog()
+    number = 0
+    while number != 'exit':
+        # Bind raw_input to input for both Python2 and Python3 compatibility
+        try:
+            input = raw_input
+        except NameError:
+            pass
 
-    # Display the converted number
-    print(convert_units(value, from_unit, to_unit))
-    print("\n") # make clear that a new conversion begun
+        # Ask user for a number
+        from_unit, to_unit, value = input_dialog()
+
+        # Display the converted number
+        print(convert_units(value, from_unit, to_unit))
+        print("\n") # make clear that a new conversion begun

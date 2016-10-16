@@ -13,7 +13,7 @@ def watts_to_volts(watts, amps):
 
 
 # Watts to Ohms given Amps or Volts
-def watts_to_ohms(watts, amps = None, volts = None):
+def watts_to_ohms(watts, amps=None, volts = None):
     if amps is not None:
         return watts / (amps * amps)
     elif volts is not None:
