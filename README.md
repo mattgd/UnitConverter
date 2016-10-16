@@ -48,18 +48,9 @@ Enter the value: 12
 
 ###Contributing to This Repository
 
-If you'd like to contribute, feel free to make changes or additions and submit a pull request. Below are two full example methods:
-```
-# Watts to Horsepower
-def w_to_hp(watts):
-    return watts * 746
-```
-```
-# Pa to psi
-def Pa_to_psi(value):
-    return value / 6894.76
-```
-Please create new converter files for new conversion sections and use existing ones for the conversion.
+If you'd like to contribute, feel free to make changes or additions and submit a pull request.
+
+Please create new converter files for new conversion sections and use existing ones for the conversion. Take a look at other files in the `converters` directory for a template on creating a new conversion section.
 
 If you have created a new file for new conversion sections don't forget to include all functions into the `__init__.py` in the `converters` module and create an entry in the `UNITS` array in the `converters.Converter` file
 
