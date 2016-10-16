@@ -10,6 +10,7 @@ from ElectricConverter import *
 from PressureConverter import *
 from SpeedConverter import *
 from ForceConverter import *
+from CurrencyConverter import *
 
 possibles = globals().copy()
 possibles.update(locals())
@@ -36,13 +37,18 @@ def convert(from_unit, to_unit, *args, **kwargs):
                 # remove already given variables
                 missing_si_varname.pop(0)
             # only not given variable names are listed
-            if len(convert_function.func_defaults) == len(missing_si_varname):
+            if convert_function.func_defaults is not None and len(convert_function.func_defaults) == len(missing_si_varname):
                 # should not be >= because if all other params are optional
                 # it means that only one has to be set for the function to work (specification)
                 raise RequireAdditionalParamError(missing_si_varname)
 
         # take the named additional params and map the si to the "_internal_function_" name
         additional_params = {_find_unit(k)['_internal_function_']: v for k, v in kwargs.iteritems()}
+
+        if (_find_unit_category(from_unit)["name"] == "Currency"):
+            # currency function does take the from_unit and to_unit as param
+            additional_params["from_unit"] = from_unit
+            additional_params["to_unit"] = to_unit
 
         return convert_function(*args, **additional_params)
     except AttributeError as e:
