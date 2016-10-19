@@ -3,7 +3,7 @@
 
 # Newtons to Dynes (dyn)
 def n_to_dyn(n):
-    return n * 10 ^ 5
+    return n * 10 ** 5
 
 
 # Dynes to Newtons (n)
