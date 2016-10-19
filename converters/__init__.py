@@ -45,7 +45,7 @@ def convert(from_unit, to_unit, *args, **kwargs):
         # take the named additional params and map the si to the "_internal_function_" name
         additional_params = {_find_unit(k)['_internal_function_']: v for k, v in kwargs.iteritems()}
 
-        if (_find_unit_category(from_unit)["name"] == "Currency"):
+        if _find_unit_category(from_unit)["name"] == "Currency":
             # currency function does take the from_unit and to_unit as param
             additional_params["from_unit"] = from_unit
             additional_params["to_unit"] = to_unit
