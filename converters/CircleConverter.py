@@ -1,16 +1,34 @@
 # -*- coding: utf-8 -*-
 import math
 
-
-def radians_to_degrees(radians):
-    """
-    Convert radians to degrees
-    """
-    return math.degrees(radians)
-
-
-def degrees_to_radians(degrees):
-    """
-    Convert degrees to radians
-    """
-    return math.radians(degrees)
+circle_conversions = \
+    {
+        "name": "Circle",
+        "units": [
+            {
+                "name": "Radians",
+                "si": "rad",
+                "_internal_accepted_names": [
+                    "rad",
+                    "radians",
+                ],
+                "_internal_function_": "radians",
+                "_internal_conversion": {
+                    "degrees": lambda radians: math.degrees(radians),  # radians to degrees
+                }
+            },
+            {
+                "name": "Degrees",
+                "si": "°",
+                "_internal_accepted_names": [
+                    "deg",
+                    "degree",
+                    "degrees",
+                ],
+                "_internal_function_": "degrees",
+                "_internal_conversion": {
+                    "radians": lambda degrees: math.radians(degrees),  # degrees to radians
+                }
+            },
+        ],
+    }

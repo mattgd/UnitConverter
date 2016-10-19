@@ -1,28 +1,46 @@
 # -*- coding: utf-8 -*-
-# Kilometers/hour (kph) and miles/hour (mph)
 
-
-def kph_to_mph(kph):
-    return kph * 0.6214
-
-
-def mph_to_kph(mph):
-    return mph * 1.609
-
-
-# Kilometers/hour and knots
-def kph_to_kt(kph):
-    return kph * 0.534
-
-
-def kt_to_kph(kt):
-    return kt * 1.852
-
-
-# knots and miles/hour
-def kt_to_mph(kt):
-    return kt_to_kph(kph_to_mph(kt))
-
-
-def mph_to_kt(mph):
-    return mph_to_kph(kph_to_kt(mph))
+speed_conversions = \
+    {
+        "name": "Speed",
+        "units": [
+            {
+                "name": "Kilometer per hour",
+                "si": "km/h",
+                "_internal_accepted_names": [
+                    "kmh",
+                    "kph",
+                ],
+                "_internal_function_": "kph",
+                "_internal_conversion": {
+                    "mph": lambda kph: kph * 0.6214,  # kph to mph
+                    "kt": lambda kph: kph * 0.534,  # kph to kt
+                },
+            },
+            {
+                "name": "Miles per hour",
+                "si": "mph",
+                "_internal_accepted_names": [
+                    "mph",
+                ],
+                "_internal_function_": "mph",
+                "_internal_conversion": {
+                    "kph": lambda mph: mph * 1.609,  # mph to kph
+                    "kt": lambda mph: mph * 0.868976,  # kph to kt
+                },
+            },
+            {
+                "name": "Knots",
+                "si": "kn",
+                "_internal_accepted_names": [
+                    "kn",
+                    "kt",
+                ],
+                "_internal_function_": "kt",
+                "_internal_conversion": {
+                    "kph": lambda kt: kt * 1.852,  # kt to kph
+                    "mph": lambda kt: kt * 1.15078,  # kt to mph
+                },
+            },
+        ],
+    }
