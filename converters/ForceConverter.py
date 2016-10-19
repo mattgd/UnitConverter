@@ -1,61 +1,68 @@
-# FORCE CONVERSION
+# -*- coding: utf-8 -*-
 
-
-# Newtons to Dynes (dyn)
-def n_to_dyn(n):
-    return n * 10 ** 5
-
-
-# Dynes to Newtons (n)
-def dyn_to_n(dyn):
-    return dyn * 0.00001  # Precision of 5 significant digits
-
-
-# Newtons to Poundals (pdl)
-def n_to_pdl(n):
-    return n * 7.23301  # Precision of 5 significant digits
-
-
-# Poundals to Newtons (n)
-def pdl_to_n(pdl):
-    return pdl * 0.13826  # Precision of 5 significant digits
-
-
-# Newtons to Kilogram-Force (kp)
-def n_to_kp(n):
-    return n * 0.10197  # Precision of 5 significant digits
-
-
-# Kilogram-Force to Newtons
-def kp_to_n(kp):
-    return kp * 9.80665  # Precision of 5 significant digits
-
-
-# Dyne to Kilogram-Force (kp)
-def dyn_to_kp(dyn):
-    return n_to_kp(dyn_to_n(dyn))
-
-
-# Kilogram-Force to Dyne (dyn)
-def kp_to_dyn(kp):
-    return n_to_dyn(kp_to_n(kp))
-
-
-# Dynes to Poundals (pdl)
-def dyn_to_pdl(dyn):
-    return n_to_pdl(dyn_to_n(dyn))
-
-
-# Poundals to Dynes (dyn)
-def pdl_to_dyn(pdl):
-    return n_to_dyn(pdl_to_n(pdl))
-
-
-# Kilogram-Force to Poundals (pdl)
-def kp_to_pdl(kp):
-    return n_to_pdl(kp_to_n(kp))
-
-
-# Poundals to Kilogram-Force (kp)
-def pdl_to_kp(pdl):
-    return n_to_kp(pdl_to_n(pdl))
+force_conversions = \
+    {
+        "name": "Force",
+        "units": [
+            {
+                "name": "Newtons",
+                "si": "N",
+                "_internal_accepted_names": [
+                    "n",
+                    "newton",
+                    "newtons",
+                ],
+                "_internal_function_": "n",
+                "_internal_conversion": {
+                    "dyn": lambda n: n * 10 ** 5,  # n to dyn
+                    "pdl": lambda n: n * 7.23301,  # n to pdl
+                    "kp": lambda n: n * 0.10197,  # n to kp
+                },
+            },
+            {
+                "name": "Dyne",
+                "si": "dyn",
+                "_internal_accepted_names": [
+                    "dyn",
+                    "dyne",
+                    "dynes",
+                ],
+                "_internal_function_": "dyn",
+                "_internal_conversion": {
+                    "n": lambda dyn: dyn * 0.00001,  # dyn to n
+                    "pdl": lambda dyn: dyn / 13825.4954376,  # dyn to pdl
+                    "kp": lambda dyn: dyn * 1.01972E-6,  # dyn to kp
+                },
+            },
+            {
+                "name": "Poundals",
+                "si": "pdl",
+                "_internal_accepted_names": [
+                    "pdl",
+                    "poundal",
+                    "poundals",
+                ],
+                "_internal_function_": "pdl",
+                "_internal_conversion": {
+                    "n": lambda pdl: pdl * 0.1382549544,  # pdl to n
+                    "dyn": lambda pdl: pdl * 13825.4954376,  # pdl to dyn
+                    "kp": lambda pdl: pdl * 0.01409808185017,  # pdl to kp
+                },
+            },
+            {
+                "name": "Kilogram-force",
+                "si": "kp",
+                "_internal_accepted_names": [
+                    "kp",
+                    "kgf",
+                    "kps",
+                ],
+                "_internal_function_": "kp",
+                "_internal_conversion": {
+                    "n": lambda kp: kp * 9.80665,  # kp to n
+                    "dyn": lambda kp: kp * 980665,  # kp to dyn
+                    "pdl": lambda kp: kp * 70.93163528397,  # kp to pdl
+                },
+            },
+        ],
+    }

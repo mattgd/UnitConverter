@@ -167,11 +167,22 @@ def convert_units(value, from_unit, to_unit, **args):
     try:
         return str(round(convert(from_unit, to_unit, float(value), **args), decimal_places)) + " " + get_si(to_unit)
     except RequireAdditionalParamError as e:
-        additional_unit = input("\n[*] Enter an additional unit (choose between " + str(e.additional_params) + "): ")
-        additional_value = float(input("\n[*] Enter the value: "))
-        return convert_units(value, from_unit, to_unit, **{additional_unit: additional_value})
+        return handle_additional_required_params(e.additional_params)
     except ConversionError as e:
         print(e.reason)
+
+
+def handle_additional_required_params(additional_params):
+    if len(additional_params) == 1:
+        additional_unit = additional_params[0]
+        additional_value = float(input("\n[*] Enter an additional value for {0}: ".format(additional_unit)))
+    else :
+        additional_unit = input("\n[*] Enter an additional unit (choose between " + str(additional_params) + "): ")
+        if additional_unit not in additional_params:
+            print("\n[x] The entered unit cannot be applied.")
+            return handle_additional_required_params(additional_params)
+        additional_value = float(input("\n[*] Enter the value: "))
+    return convert_units(value, from_unit, to_unit, **{additional_unit: additional_value})
 
 
 def input_dialog():
@@ -220,4 +231,3 @@ if __name__ == '__main__':
 
         # Display the converted number
         print(convert_units(value, from_unit, to_unit))
-        print("\n") # make clear that a new conversion begun
