@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import requests
 import json
-from ConversionError import ConversionError
+from exceptions import ConversionError
 
 currency_conversions = \
     {

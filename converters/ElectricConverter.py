@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ConversionError import ConversionError
+from exceptions import ConversionError
 
 electric_conversions = \
     {
