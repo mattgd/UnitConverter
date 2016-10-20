@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from .converter import UNITS
-from exceptions import ConversionError, RequireAdditionalParamError
+from .units import UNITS
+from converters.exceptions import ConversionError, RequireAdditionalParamError
 
 
 def convert(from_unit, to_unit, *args, **kwargs):
