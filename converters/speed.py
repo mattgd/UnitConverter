@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-speed_conversions = {
+speed = {
     "name": "Speed",
     "units": [
         {

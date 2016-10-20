@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-temperature_conversions = {
+temperature = {
     "name": "Temperature",
     "units": [
         {

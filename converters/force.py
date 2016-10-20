@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-force_conversions = {
+force = {
     "name": "Force",
     "units": [
         {

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-pressure_conversions = {
+pressure = {
     "name": "Pressure",
     "units": [
         {

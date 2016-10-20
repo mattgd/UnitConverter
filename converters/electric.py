@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from converters.exceptions import ConversionError
 
-electric_conversions = {
+electric = {
     "name": "Energy",
     "units": [
         {

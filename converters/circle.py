@@ -3,7 +3,7 @@
 import math
 
 
-circle_conversions = {
+circle = {
     "name": "Circle",
     "units": [
         {

@@ -3,7 +3,7 @@ import requests
 import json
 from converters.exceptions import ConversionError
 
-currency_conversions = {
+currency = {
     "name": "Currency",
     "general_method": lambda money, from_unit, to_unit: cur_to_cur(money, from_unit, to_unit),
     "units": [

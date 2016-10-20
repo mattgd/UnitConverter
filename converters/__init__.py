@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .units import UNITS
+from units import UNITS
 from converters.exceptions import ConversionError, RequireAdditionalParamError
 
 
