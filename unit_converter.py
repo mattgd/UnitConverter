@@ -1,12 +1,13 @@
 import sys
 import unit_dictionary
 from converters import convert, can_convert, get_si, get_suggestions_for_category, get_suggestions_to_given_unit
-from converters.ConversionError import ConversionError
-from converters.RequireAdditionalParamError import RequireAdditionalParamError
+from converters.exceptions import ConversionError, RequireAdditionalParamError
 
 
 class State():
-    NO_CATEGORY_ENTERED, CATEGORY_HELP_ENTERED, FIRST_UNIT_ENTERED, SECOND_UNIT_ENTERED, VALUE_ENTERED = range(5)
+    NO_CATEGORY_ENTERED, CATEGORY_HELP_ENTERED, FIRST_UNIT_ENTERED,\
+    SECOND_UNIT_ENTERED, VALUE_ENTERED, ADDITIONAL_UNIT_NEEDED,\
+    ADDITIONAL_VALUE_NEEDED = range(7)
 
 program_state = State.NO_CATEGORY_ENTERED
 
@@ -170,16 +171,32 @@ def convert_units(value, from_unit, to_unit, **args):
 
 
 def handle_additional_required_params(additional_params):
+    global program_state
+
     if len(additional_params) == 1:
         additional_unit = additional_params[0]
-        additional_value = float(input("\n[*] Enter an additional value for {0}: ".format(additional_unit)))
+        while True:
+            program_state = State.ADDITIONAL_VALUE_NEEDED
+            additional_value = handle_input(input("\n[*] Enter an additional value for {0}: ".format(additional_unit)), additional_unit)
+            if additional_value is not None:
+                break
     else:
-        additional_unit = input("\n[*] Enter an additional unit (choose between " + str(additional_params) + "): ")
-        if additional_unit not in additional_params:
-            print("\n[x] The entered unit cannot be applied.")
-            return handle_additional_required_params(additional_params)
-        additional_value = float(input("\n[*] Enter the value: "))
-    return convert_units(value, from_unit, to_unit, **{additional_unit: additional_value})
+        while True:
+            program_state = State.ADDITIONAL_UNIT_NEEDED
+            additional_unit = handle_input(input("\n[*] Enter an additional unit (choose between " + str(additional_params) + "): "), str(additional_params))
+            if additional_unit is not None:
+                if additional_unit not in additional_params:
+                    print("\n[x] The entered unit cannot be applied.")
+                    continue
+                else:
+                    break
+
+        while True:
+            program_state = State.ADDITIONAL_VALUE_NEEDED
+            additional_value = handle_input(input("\n[*] Enter the value: "), additional_unit)
+            if additional_value is not None:
+                break
+    return convert_units(float(value), from_unit, to_unit, **{additional_unit: float(additional_value)})
 
 
 def handle_input(input_str, *args):
@@ -202,11 +219,15 @@ def handle_input(input_str, *args):
                 print('\t[?] {0}'.format(unit))
         elif program_state == State.FIRST_UNIT_ENTERED:
             units = get_suggestions_to_given_unit(args[0])
-            print('\n[?] Available units to convert {0}.'.format(args[0]))
+            print('\n[?] Available units to convert {0}.'.format(*args))
             for unit in units:
                 print('\t[?] {0}'.format(unit))
         elif program_state == State.SECOND_UNIT_ENTERED:
             print('\n[?] You need to enter a value you want to convert from {0} to {1}.'.format(*args))
+        elif program_state == State.ADDITIONAL_VALUE_NEEDED:
+            print('\n[?] You need to enter a value for {0} in order to convert the value.'.format(*args))
+        elif program_state == State.ADDITIONAL_UNIT_NEEDED:
+            print('\n[?] You need to choose between {0} and give a value for this unit in order to convert the given value.'.format(*args))
     elif "exit" == input_str:
         print('[-] Program exited.')
         sys.exit(0)
