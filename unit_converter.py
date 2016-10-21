@@ -1,8 +1,7 @@
 import sys
 import unit_dictionary
 from converters import convert, can_convert, get_si
-from converters.ConversionError import ConversionError
-from converters.RequireAdditionalParamError import RequireAdditionalParamError
+from converters.exceptions import ConversionError, RequireAdditionalParamError
 
 
 # TIME CONVERSION
