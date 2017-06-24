@@ -2,7 +2,7 @@
 <h1><a href="https://github.com/mattgd/UnitConverter" target="_blank"><img width="175" src="https://www.mattdzwonczyk.com/unitconverter/logo-color.png"></a></h1>
 A unit conversion API module in Python.
 
-###Requirements
+### Requirements
 * **Python2 & above**
 
 ### Supported Units and Categories
@@ -20,7 +20,7 @@ A unit conversion API module in Python.
 | Force             | Newton (N), dyne (dyn), Kilogram-Force (kp), Poundal (pdl)                                                                                                                                                                                                                                                                                                                                                                               |
 | Digital Storage   | bit (bit), byte (byte), kilobyte (kB), megabyte (MB), gigabyte (GB), terabyte (TB), petabyte (PB), exabyte (EB), zettabyte (ZB), yottabyte (YB)                                                                                                                                                                                                                                                                |
 
-###Examples
+### Examples
 
 ```python
 UnitConverter $ python unit_converter.py
@@ -46,6 +46,6 @@ Enter the value: 12
 12 Ω
 ```
 
-###Contributing to This Repository
+### Contributing to This Repository
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute to the UnitConverter repository.
