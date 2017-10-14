@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import requests
 import json
-from converters.exceptions import ConversionError
+from UnitConverter.converters.exceptions import ConversionError
 
 currency = {
     "name": "Currency",

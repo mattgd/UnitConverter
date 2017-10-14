@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-from converters.circle import circle
-from converters.currency import currency
-from converters.electric import electric
-from converters.force import force
-from converters.pressure import pressure
-from converters.speed import speed
-from converters.temperature import temperature
+from UnitConverter.converters.circle import circle
+from UnitConverter.converters.currency import currency
+from UnitConverter.converters.electric import electric
+from UnitConverter.converters.force import force
+from UnitConverter.converters.pressure import pressure
+from UnitConverter.converters.speed import speed
+from UnitConverter.converters.temperature import temperature
 
 
 class UnitsManager(object):
