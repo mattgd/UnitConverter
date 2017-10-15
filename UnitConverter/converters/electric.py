@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from converters.exceptions import ConversionError
+from UnitConverter.converters.exceptions import ConversionError
 
 electric = {
     "name": "Energy",
