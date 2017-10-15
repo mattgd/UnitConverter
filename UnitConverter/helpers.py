@@ -1,6 +1,6 @@
-import unit_dictionary
-from converters import convert, can_convert, get_si
-from converters.exceptions import ConversionError, RequireAdditionalParamError
+from . import unit_dictionary
+from .converters import convert, can_convert, get_si
+from .converters.exceptions import ConversionError, RequireAdditionalParamError
 
 
 # TIME CONVERSION

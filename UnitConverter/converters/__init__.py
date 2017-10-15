@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from UnitConverter.units import UNITS
 from UnitConverter.converters.exceptions import ConversionError, RequireAdditionalParamError
+import sys
 
+IS_PYTHON_2 = sys.version_info[0] < 3
 
 def convert(from_unit, to_unit, *args, **kwargs):
     """
@@ -25,21 +27,39 @@ def convert(from_unit, to_unit, *args, **kwargs):
             return category["general_method"](*args, **additional_params)
 
         convert_function = _find_unit(from_unit)["_internal_conversion"][_find_unit(to_unit)["_internal_function_"]]
-        missing_si_varname = map(lambda varname: get_si(varname), convert_function.func_code.co_varnames)
 
-        if len(args) + len(kwargs) < len(missing_si_varname):
+        missing_si_varname = None
+        missing_si_varname_len = None
+        if IS_PYTHON_2:
+            missing_si_varname = map(lambda varname: get_si(varname), convert_function.func_code.co_varnames)
+            missing_si_varname_len = len(missing_si_varname)
+        else:
+            missing_si_varname = map(lambda varname: get_si(varname), convert_function.__code__.co_varnames)
+            missing_si_varname_len = len(list(missing_si_varname)) 
+
+        if len(args) + len(kwargs) < missing_si_varname_len:
             for i in range(len(args) + len(kwargs)):
                 # remove already given variables
                 missing_si_varname.pop(0)
                 # only not given variable names are listed
-            if convert_function.func_defaults is not None and len(convert_function.func_defaults) == len(
-                    missing_si_varname):
+
+            func_defaults = None
+            if IS_PYTHON_2:
+                func_defaults = convert_function.func_defaults
+            else:
+                func_defaults = convert_function.__defaults__
+
+            if func_defaults is not None and len(func_defaults) == len(missing_si_varname):
                 # should not be >= because if all other params are optional
                 # it means that only one has to be set for the function to work (specification)
                 raise RequireAdditionalParamError(missing_si_varname)
 
         # take the named additional params and map the si to the "_internal_function_" name
-        additional_params = {_find_unit(k)['_internal_function_']: v for k, v in kwargs.iteritems()}
+        additional_params = None
+        if IS_PYTHON_2:
+            additional_params = {_find_unit(k)['_internal_function_']: v for k, v in kwargs.iteritems()}
+        else:
+            additional_params = {_find_unit(k)['_internal_function_']: v for k, v in kwargs.items()}
 
         return convert_function(*args, **additional_params)
     except AttributeError:
