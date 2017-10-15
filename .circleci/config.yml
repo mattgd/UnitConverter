@@ -25,7 +25,7 @@ jobs:
           name: install dependencies
           command: |
             pip install -r requirements.txt
-            pip install tox tox-pyenv
+            pip install pyenv tox tox-pyenv
             pyenv local 2.6.8 2.7.10 3.3.3 3.4.3 3.5.0
 
       - save_cache:
