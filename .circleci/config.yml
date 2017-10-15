@@ -24,9 +24,9 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            python3 -m venv venv
-            . venv/bin/activate
             pip install -r requirements.txt
+            pip install tox tox-pyenv
+            pyenv local 2.6.8 2.7.10 3.3.3 3.4.3 3.5.0
 
       - save_cache:
           paths:
