@@ -18,7 +18,7 @@ electric = {
                 "ohms": lambda watts, amps = None, volts = None: watts_to_ohms(watts, amps, volts),  # watts to ohms
                 "amps": lambda watts, volts = None: watts / volts,  # watts to amps
                 "joules": lambda watts, seconds = None: watts * seconds,  # watts to joules
-                "horsepower": lambda watts: watts * 746,  # watts to horsepower
+                "horsepower": lambda watts: watts / 745.699872,  # watts to horsepower
                 "btups": lambda watts: watts * 0.00095,  # watts to btu
                 "cal": lambda watts: watts * 0.23885,  # watts to calories
             },
@@ -73,6 +73,9 @@ electric = {
                 "horsepower",
             ],
             "_internal_function_": "horsepower",
+            "_internal_conversion": {
+                "watts": lambda horsepower: horsepower * 745.699872,  # horsepower to watts
+            },
         },
         {
             "name": "British thermal unit",
