@@ -2,6 +2,9 @@
 <h1><a href="https://github.com/mattgd/UnitConverter" target="_blank"><img width="175" src="https://www.mattdzwonczyk.com/unitconverter/logo-color.png"></a></h1>
 A unit conversion API module in Python.
 
+### Build Status
+[![Build Status](https://travis-ci.org/mattgd/UnitConverter.svg?branch=master)](https://travis-ci.org/mattgd/UnitConverter)
+
 ### Requirements
 * **Python2 & above**
 
