@@ -154,6 +154,9 @@ def convert_units(value, from_unit, to_unit, **args):
             return response
 
     # actually convert the units
+
+    print(value, from_unit, to_unit, round(convert(from_unit, to_unit, float(value), **args), decimal_places))
+
     try:
         return str(round(convert(from_unit, to_unit, float(value), **args), decimal_places)) + " " + get_si(to_unit)
     except RequireAdditionalParamError as e:

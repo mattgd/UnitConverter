@@ -3,6 +3,7 @@ from UnitConverter.units import UNITS
 from UnitConverter.converters.exceptions import ConversionError, RequireAdditionalParamError
 import sys
 
+# set so that we know which fields we can access
 IS_PYTHON_2 = sys.version_info[0] < 3
 
 def convert(from_unit, to_unit, *args, **kwargs):
@@ -25,8 +26,15 @@ def convert(from_unit, to_unit, *args, **kwargs):
             # currency function does take the from_unit and to_unit as param
             additional_params = {"from_unit": from_unit, "to_unit": to_unit}
             return category["general_method"](*args, **additional_params)
-            
-        convert_function = _find_unit(from_unit)["_internal_conversion"][_find_unit(to_unit)["_internal_function_"]]
+
+        from_unit_dict = _find_unit(from_unit)
+        to_unit_dict = _find_unit(to_unit)
+
+        # converting from an alias of the same unit, so just return the same same unit function
+        if not set(from_unit_dict["_internal_accepted_names"]).isdisjoint(to_unit_dict["_internal_accepted_names"]):
+            convert_function = lambda unit: unit * 1.00
+        else:
+            convert_function = from_unit_dict["_internal_conversion"][to_unit_dict["_internal_function_"]]
 
         missing_si_varname = None
         missing_si_varname_len = None
@@ -74,14 +82,14 @@ def can_convert(from_unit, to_unit):
     :return: bool - true if unit can be converted
                     false otherwise
     """
-    # There must be an implementation to convert the units
+    # there must be an implementation to convert the units
     from_unit_category = _find_unit_category(from_unit)
     to_unit_category = _find_unit_category(to_unit)
 
     if from_unit_category is None or to_unit_category is None:
         return False
 
-    # The units have to be in the same category (mph to watts does not make any sense)
+    # the units have to be in the same category (mph to watts does not make any sense)
     if from_unit_category["name"] != to_unit_category["name"]:
         return False
 
@@ -188,3 +196,13 @@ def _format_unit_output(unit):
     :return:
     """
     return unit["name"] + " (" + unit["_internal_function_"] + ")"
+
+
+def _same_unit_conversion(unit):
+    """
+    Function for returning the same value if the from/to units are the same (aliases)
+    :param *args:
+    :param **additional_params:
+    :return: the same value passed in
+    """
+    return 
