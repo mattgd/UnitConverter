@@ -2,7 +2,7 @@ import sys
 import unit_dictionary
 from converters import convert, can_convert, get_si, get_suggestions_for_category, get_suggestions_to_given_unit
 from converters.exceptions import ConversionError, RequireAdditionalParamError
-
+import re
 
 class State():
     NO_CATEGORY_ENTERED, CATEGORY_HELP_ENTERED, FIRST_UNIT_ENTERED,\
@@ -118,8 +118,32 @@ def check_metric_imperial(value, units_from, units_to, decimal_places):
 
     return False
 
+ 
+def base_conversion(value, from_unit, to_unit):
+    accepted_entry = ['b2','b3','b4','b5','b6','b7','b8','b9','b10']
+
+    # connvert input to decimal
+    if from_unit in accepted_entry and to_unit in accepted_entry:
+        from_unit = int(from_unit[1])
+        to_unit = int(to_unit[1])
+
+        decimal = 0
+        for dig in range(len(value)):
+            decimal += len(value[dig]) * from_unit ** (len(value) - 1 - dig) * int(value[dig])
+
+        # convert decimal to target base
+        output = ''
+        
+        while decimal > 0 :
+            remainder = decimal % to_unit
+            output += str(remainder)
+            decimal = decimal // to_unit
+            
+            
+        return int(output[::-1])
 
 def convert_units(value, from_unit, to_unit, **args):
+
     """
     Takes the given value, source unit and target unit to convert.
     :param value: Value to convert
@@ -128,7 +152,6 @@ def convert_units(value, from_unit, to_unit, **args):
     :param args: Additional arguments important for conversion with multiple dependencies
     :return:
     """
-
     # Check if units can be converted
     if not can_convert(from_unit, to_unit):
         return '[!] Units cannot be converted\n'
@@ -141,8 +164,9 @@ def convert_units(value, from_unit, to_unit, **args):
     # Return the value if units are the same
     if from_unit == to_unit:
         return str(value) + " " + get_si(to_unit)
-
+    
     responses = [
+        base_conversion(value, from_unit, to_unit),
         check_time(value, from_unit, to_unit, decimal_places),  # Time units
         check_metric_imperial(
             value,
@@ -281,7 +305,10 @@ if __name__ == '__main__':
         \nUnits supported:\n \
         Circle\t\t: radians (rad), degrees (deg) \n \
         Temperature\t: Celsius (c), Fahrenheit (f), and Kelvin (k) \n \
-        Speed\t\t: Kilometers/hour (kph), miles/hour (mph), knots(kt) .')
+        Speed\t\t: Kilometers/hour (kph), miles/hour (mph), knots(kt) .\n \
+        Base conversion: b2 , b3 , b4 , b5 , b6')
+    
+        
     print('\n\n[-] Example entries: 1.345/rad/degrees, 33/f/c, 2/mph/kph')
     print('\n\n[-] To close type "exit"')
 

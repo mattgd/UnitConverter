@@ -6,6 +6,7 @@ from converters.force import force
 from converters.pressure import pressure
 from converters.speed import speed
 from converters.temperature import temperature
+from converters.base_conversion import base_conversion
 
 
 class UnitsManager(object):
@@ -21,6 +22,7 @@ class UnitsManager(object):
         pressure,
         speed,
         temperature,
+        base_conversion,
     ]
 
     def __iter__(self):
