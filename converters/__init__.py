@@ -55,7 +55,7 @@ def can_convert(from_unit, to_unit):
                     false otherwise
     """
     # There must be an implementation to convert the units
-    from_unit_category = _find_unit_category(from_unit)
+    from_unit_category  = _find_unit_category(from_unit)
     to_unit_category = _find_unit_category(to_unit)
 
     if from_unit_category is None or to_unit_category is None:
