@@ -13,7 +13,7 @@ class UnitsManager(object):
     Class responsible to manage the unit converters
     of this application.
     '''
-    _units = [
+    units = [
         circle,
         currency,
         electric,
@@ -24,7 +24,7 @@ class UnitsManager(object):
     ]
 
     def __iter__(self):
-        return (x for x in self._units)
+        return (x for x in self.units)
 
     def register(self, converter):
         """
@@ -34,7 +34,7 @@ class UnitsManager(object):
         the core of this application.
         """
         if converter is not None and callable(converter):
-            self._units.append(converter)
+            self.units.append(converter)
 
 
 UNITS = UnitsManager()
